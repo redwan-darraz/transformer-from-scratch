@@ -1,22 +1,21 @@
 # transformer-from-scratch
 
-Rebuilding the Transformer architecture from scratch in Python and PyTorch, following Karpathy's *"Let's build GPT"* lecture and the *"Attention is All You Need"* paper.
+Hands-on implementation of the core Transformer building blocks — BPE tokenization and the attention mechanism — built from scratch in pure Python and PyTorch.
 
 ## Labs
 
 ### LAB 1.1 — BPE Tokenizer from Scratch
 
-Build a BPE tokenizer from scratch, implement encode/decode, compare with tiktoken. → [`lab01_tokenizer/`](lab01_tokenizer/)
+Implement Byte Pair Encoding from A to Z, verify a perfect encode/decode round-trip, compare with tiktoken. → [`lab01_tokenizer/`](lab01_tokenizer/)
 
-### LAB 1.2 — Attention Mechanism from Scratch
+### LAB 1.2 — Multi-Head Attention from Scratch
 
-Scaled dot-product attention in NumPy → Multi-Head Attention in PyTorch. → [`lab02_attention/`](lab02_attention/)
+Scaled dot-product attention in NumPy → Multi-Head Attention in PyTorch, verified against `nn.MultiheadAttention`. → [`lab02_attention/`](lab02_attention/)
 
 ## Stack
 
-Python · NumPy · PyTorch · matplotlib
+Python 3.11 · NumPy · PyTorch · matplotlib · Jupyter
 
 ## Resources
 
-- [Karpathy — Let's build GPT from scratch (YouTube)](https://www.youtube.com/watch?v=kCc8FmEb1nY)
 - [Attention is All You Need (Vaswani et al., 2017)](https://arxiv.org/abs/1706.03762)

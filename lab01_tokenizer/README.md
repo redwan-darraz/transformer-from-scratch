@@ -1,16 +1,26 @@
 # LAB 1.1 — BPE Tokenizer from Scratch
 
-Build a Byte Pair Encoding tokenizer from scratch and compare it against tiktoken.
+**Difficulty:** ⭐⭐☆☆☆ · **Time:** 3-4h · **Stack:** Python 3.11, collections, tiktoken, Jupyter
 
-## Goals
+## Goal
 
-- Implement BPE encoding and decoding with a perfect round-trip
-- Compare vocabulary and token counts with tiktoken
-- Understand how subword tokenization works under the hood
+Understand how an LLM transforms text into tokens. Implement BPE (Byte Pair Encoding) from A to Z using pure Python, no external libraries.
 
-## Files
+## Steps
 
-| File | Description |
-|------|-------------|
-| `bpe_tokenizer.py` | BPE tokenizer implementation |
-| `compare_tiktoken.py` | Side-by-side comparison with tiktoken |
+1. Create a corpus of 100 sentences. Implement `get_stats(vocab)` — count all adjacent symbol pairs.
+2. Implement `merge_vocab(pair, vocab)` — merge the most frequent pair into a new token.
+3. Loop 50 merges — observe the vocabulary evolving from characters to full words.
+4. Write `encode(text)` and `decode(tokens)` — verify a perfect round-trip.
+5. Compare with tiktoken (`cl100k_base`) on 5 sentences — explain the differences.
+6. Push to GitHub branch `feature/tokenizer-bpe` — clean notebook with visible outputs.
+
+## Success Criteria
+
+- `decode(encode("Hello world")) == "Hello world"` — perfect round-trip
+- You can explain BPE in 90 seconds without notes
+- Notebook with outputs visible on GitHub
+
+## Recruiter Demo
+
+Open the notebook, tokenize a sentence live, explain each cell.
