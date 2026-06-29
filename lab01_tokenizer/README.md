@@ -1,26 +1,42 @@
-# LAB 1.1 — BPE Tokenizer from Scratch
+# BPE Tokenizer — from scratch
 
-**Difficulty:** ⭐⭐☆☆☆ · **Time:** 3-4h · **Stack:** Python 3.11, collections, tiktoken, Jupyter
+Pure Python implementation of Byte Pair Encoding, the tokenization algorithm used by GPT-2, GPT-3 and GPT-4.
 
-## Goal
+No external libraries used for the core algorithm — only `collections`. tiktoken is used at the end for comparison only.
 
-Understand how an LLM transforms text into tokens. Implement BPE (Byte Pair Encoding) from A to Z using pure Python, no external libraries.
+## What it does
 
-## Steps
+Transforms raw text into integer token IDs, the same way a real LLM tokenizer works:
 
-1. Create a corpus of 100 sentences. Implement `get_stats(vocab)` — count all adjacent symbol pairs.
-2. Implement `merge_vocab(pair, vocab)` — merge the most frequent pair into a new token.
-3. Loop 50 merges — observe the vocabulary evolving from characters to full words.
-4. Write `encode(text)` and `decode(tokens)` — verify a perfect round-trip.
-5. Compare with tiktoken (`cl100k_base`) on 5 sentences — explain the differences.
-6. Push to GitHub branch `feature/tokenizer-bpe` — clean notebook with visible outputs.
+```python
+"the model learns"  →  [35, 17, 62, 9, 55, 16, 78, 18, 32]
+[35, 17, 62, 9, 55, 16, 78, 18, 32]  →  "the model learns"
+```
 
-## Success Criteria
+## How it works
 
-- `decode(encode("Hello world")) == "Hello world"` — perfect round-trip
-- You can explain BPE in 90 seconds without notes
-- Notebook with outputs visible on GitHub
+BPE starts with individual characters and repeatedly merges the most frequent adjacent pair into a single token. After 50 merges on a 100-sentence corpus:
 
-## Recruiter Demo
+- `"the"` goes from 4 tokens → 1 token (merged at iteration 7)
+- `"training"` goes from 9 tokens → 3 tokens (`tra` + `in` + `ing`)
+- `"backpropagation"` stays split — too rare to fully merge
 
-Open the notebook, tokenize a sentence live, explain each cell.
+## Implementation
+
+| Function        | Role                                                          |
+| --------------- | ------------------------------------------------------------- |
+| `build_vocab()` | Character-level word frequency dictionary with `</w>` markers |
+| `get_stats()`   | Count adjacent symbol pairs, weighted by word frequency       |
+| `merge_vocab()` | Apply one merge rule across the entire vocabulary             |
+| `encode()`      | Text → list of integer IDs                                    |
+| `decode()`      | List of integer IDs → text                                    |
+
+## Results
+
+50 merges on 100 sentences produces a ~2x token compression ratio vs character-level encoding.
+
+Compared against tiktoken `cl100k_base` (GPT-4's tokenizer): same algorithm, but 100,000 merge rules trained on hundreds of billions of tokens. The core difference is scale, not the algorithm itself.
+
+## Stack
+
+Python 3.11 · collections · tiktoken · Jupyter Notebook
