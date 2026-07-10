@@ -6,7 +6,7 @@ Usage: python benchmark.py
 import matplotlib.pyplot as plt
 import numpy as np
 
-from tok import run_bpe, run_tiktoken, run_huggingface
+from engines import TOKENIZERS
 
 SENTENCES = [
     "hello world",
@@ -14,12 +14,6 @@ SENTENCES = [
     "gradient descent minimizes the loss",
     "backpropagation",
     "GPT-4 was released in 2023!",
-]
-
-TOKENIZERS = [
-    ("BPE (from scratch)", run_bpe),
-    ("tiktoken (cl100k_base)", run_tiktoken),
-    ("HuggingFace (mistral)", run_huggingface),
 ]
 
 
