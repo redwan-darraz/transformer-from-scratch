@@ -3,6 +3,5 @@ numpy
 matplotlib
 notebook
 tiktoken
-transformers
-sentencepiece
+tokenizers
 colorama
