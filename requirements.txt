@@ -5,3 +5,4 @@ notebook
 tiktoken
 transformers
 sentencepiece
+colorama
